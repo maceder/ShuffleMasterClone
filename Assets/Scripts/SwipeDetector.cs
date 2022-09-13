@@ -18,31 +18,31 @@ public class SwipeDetector : MonoBehaviour
     public static event Action<SwipeData> OnSwipe = delegate { };
 
 
-    private void Update()
+    private void LateUpdate()
     {
-        foreach (Touch touch in Input.touches)
-        {
-            switch (touch.phase)
+            foreach (Touch touch in Input.touches)
             {
-                case TouchPhase.Began:
-                    fingerUpPosition = touch.position;
-                    fingerDownPosition = touch.position;
-                    break;
-                case TouchPhase.Moved:
-                    fingerDownPosition = touch.position;
-                    DetectSwipe();
-                    break;
-                case TouchPhase.Ended:
-                    SendSwipe(EnumSwipeDirection.None);
-                    break;
+                switch (touch.phase)
+                {
+                    case TouchPhase.Began:
+                        fingerUpPosition = touch.position;
+                        fingerDownPosition = touch.position;
+                        break;
+                    case TouchPhase.Moved:
+                        fingerDownPosition = touch.position;
+                        DetectSwipe();
+                        break;
+                    case TouchPhase.Ended:
+                        SendSwipe(EnumSwipeDirection.None);
+                        break;
+                }
             }
-        }
     }
     private void DetectSwipe()
     {
         if (Math.Abs(HorizontalMovementDistance()) > minDistanceForSwipe)
         {
-            var direction = HorizontalMovementDistance() > 0 ? EnumSwipeDirection.Right : EnumSwipeDirection.Left;
+            var direction = HorizontalMovementDistance() > 0 ? EnumSwipeDirection.Left : EnumSwipeDirection.Right;
             SendSwipe(direction);
         }
         fingerUpPosition = fingerDownPosition;

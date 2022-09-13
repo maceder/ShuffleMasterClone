@@ -12,10 +12,6 @@ public class ObjectPool : MonoBehaviour
     void Awake()
     {
         SharedInstance = this;
-    }
-
-    void Start()
-    {
         pooledObjects = new List<GameObject>();
         GameObject tmp;
         for (int i = 0; i < amountToPool; i++)
@@ -27,9 +23,10 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
+
     public GameObject GetPooledObject()
     {
-        for (int i = 0; i < amountToPool; i++)
+        for (int i = 0; i < amountToPool - 1; i++)
         {
             if (!pooledObjects[i].activeInHierarchy)
             {

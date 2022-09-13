@@ -6,7 +6,8 @@ public class PlayerManager : MonoBehaviour
 {
     [SerializeField]
     private PlayerAnimationController playerAnimationController;
-    EnumSwipeDirection swipeDirection;
+    [SerializeField]
+    private CardsController cardsController;
     private void Awake()
     {
         SwipeDetector.OnSwipe += SwipeDetector_OnSwipe;
@@ -17,14 +18,18 @@ public class PlayerManager : MonoBehaviour
         switch (data.Direction)
         {
             case EnumSwipeDirection.Left:
+                cardsController.MoveCardToOtherHand(data.Direction);
                 playerAnimationController.LeftHandUp();
                 break;
             case EnumSwipeDirection.Right:
+                cardsController.MoveCardToOtherHand(data.Direction);
                 playerAnimationController.RightHandUp();
                 break;
             case EnumSwipeDirection.None:
+                cardsController.MoveCardToOtherHand(data.Direction);
                 playerAnimationController.SetPlayerInGameAnim();
                 break;
         }
     }
+
 }
