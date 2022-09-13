@@ -346,10 +346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c81330a7437ec0348bf2870bd43bdad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fingerDownPosition: {x: 0, y: 0}
-  fingerUpPosition: {x: 0, y: 0}
-  detectSwipeOnlyAfterRelease: 0
-  minDistanceForSwipe: 10
+  minDistanceForSwipe: 2
 --- !u!114 &1251921404
 MonoBehaviour:
   m_ObjectHideFlags: 0
