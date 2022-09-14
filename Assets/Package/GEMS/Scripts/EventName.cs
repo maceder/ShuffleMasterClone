@@ -2,7 +2,7 @@
 
 public enum EventName
 {
-    RawBacgroundArrowTouch,
-    CorrectArrow,
-    SetFinishAnimation,
+    GateCollision,
+    WhichHand,
+    SwipeDirection,
 }

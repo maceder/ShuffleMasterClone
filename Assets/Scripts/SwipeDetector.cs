@@ -15,7 +15,6 @@ public class SwipeDetector : MonoBehaviour
     [SerializeField]
     private float minDistanceForSwipe = 10f;
 
-    public static event Action<SwipeData> OnSwipe = delegate { };
 
 
     private void LateUpdate()
@@ -33,7 +32,7 @@ public class SwipeDetector : MonoBehaviour
                     DetectSwipe();
                     break;
                 case TouchPhase.Ended:
-                    SendSwipe(EnumSwipeDirection.None);
+                    Message.Send<EnumSwipeDirection>(EventName.SwipeDirection, EnumSwipeDirection.None);
                     break;
             }
         }
@@ -43,7 +42,7 @@ public class SwipeDetector : MonoBehaviour
         if (Math.Abs(HorizontalMovementDistance()) > minDistanceForSwipe)
         {
             var direction = HorizontalMovementDistance() > 0 ? EnumSwipeDirection.Left : EnumSwipeDirection.Right;
-            SendSwipe(direction);
+            Message.Send<EnumSwipeDirection>(EventName.SwipeDirection, direction);
         }
         fingerUpPosition = fingerDownPosition;
     }
@@ -51,20 +50,6 @@ public class SwipeDetector : MonoBehaviour
     {
         return fingerDownPosition.x - fingerUpPosition.x;
     }
-
-    private void SendSwipe(EnumSwipeDirection direction)
-    {
-        SwipeData swipeData = new SwipeData()
-        {
-            Direction = direction,
-        };
-        OnSwipe(swipeData);
-    }
-}
-
-public struct SwipeData
-{
-    public EnumSwipeDirection Direction;
 }
 
 

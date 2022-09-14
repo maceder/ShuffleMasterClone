@@ -2,26 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using TMPro;
 using DG.Tweening;
-
+using System;
 
 public class CardsController : MonoBehaviour
 {
-
-    private EnumSwipeDirection enumSwipeDirection;
     [SerializeField]
-    private List<GameObject> leftHand, rightHand;
+    private TextMeshProUGUI leftHandCardAmountText, rightHandCardAmountText;
+    [HideInInspector]
+    public List<GameObject> leftHand, rightHand;
     [SerializeField]
     private Transform leftHandPosition, rightHandPosition;
 
+
     public float cardMoveDelay;
     public int startCardAmount;
+
     private float currentCardDelay;
+    private EnumSwipeDirection enumSwipeDirection;
+
 
     private void Start()
     {
         enumSwipeDirection = EnumSwipeDirection.None;
-
         leftHand = new List<GameObject>();
         rightHand = new List<GameObject>();
 
@@ -43,43 +47,32 @@ public class CardsController : MonoBehaviour
             }
         }
     }
+
     private void Update()
     {
         currentCardDelay -= Time.deltaTime;
 
         if (currentCardDelay < 0)
         {
+            leftHandCardAmountText.text = (leftHand.Count - 1).ToString();
+            rightHandCardAmountText.text = (rightHand.Count - 1).ToString();
+
             currentCardDelay = cardMoveDelay;
+
             switch (enumSwipeDirection)
             {
                 case EnumSwipeDirection.Left:
                     if (leftHand.Count > 1)
-                    {
                         ShuffleCardToHands(leftHand, rightHand);
-                    }
                     break;
                 case EnumSwipeDirection.Right:
                     if (rightHand.Count > 1)
-                    {
                         ShuffleCardToHands(rightHand, leftHand);
-                    }
-
                     break;
                 case EnumSwipeDirection.None:
                     break;
 
             }
-        }
-
-        if (Input.GetKeyDown("v"))
-        {
-            Debug.Log("12");
-            SetAddedCardAmount(8);
-        }
-
-        if (Input.GetKeyDown("h"))
-        {
-            RemoveCardFromHand(leftHand, 5);
         }
     }
 
@@ -113,6 +106,10 @@ public class CardsController : MonoBehaviour
             else
             {
                 positionObj += new Vector3(0, 0.15f, 0);
+                item.transform.DOScale(new Vector3(0.74f, 0.1f, 0.57f), 0.1f).OnComplete(() =>
+                {
+                    item.transform.DOScale(new Vector3(0.67140317f, 0.1f, 0.433851123f), 0.1f);
+                });
                 item.transform.position = positionObj;
                 listObj.Add(item);
             }
@@ -120,7 +117,26 @@ public class CardsController : MonoBehaviour
         handList = listObj;
     }
 
-    private void RemoveCardFromHand(List<GameObject> _handList, int removeCardAmount)
+
+
+
+
+    #region IEnumerator
+
+    public IEnumerator AddCardDelay(List<GameObject> _handList, int _value)
+    {
+        for (int i = 1; i < _value; i++)
+        {
+            var poolCard = ObjectPool.SharedInstance.GetPooledObject();
+            if (poolCard != null)
+            {
+                poolCard.SetActive(true);
+                AddCardsToHand(poolCard, ref _handList);
+            }
+            yield return new WaitForSeconds(0.07f);
+        }
+    }
+    public IEnumerator RemoveCardFromHand(List<GameObject> _handList, int removeCardAmount)
     {
         for (int i = 0; i < removeCardAmount; i++)
         {
@@ -130,21 +146,12 @@ public class CardsController : MonoBehaviour
                 obj.SetActive(false);
                 _handList.Remove(obj);
             }
+            yield return new WaitForSeconds(0.07f);
         }
     }
 
-    private void SetAddedCardAmount(int CardAmount)
-    {
-        for (int i = 1; i < CardAmount; i++)
-        {
-            var poolCard = ObjectPool.SharedInstance.GetPooledObject();
-            if (poolCard != null)
-            {
-                poolCard.SetActive(true);
-                AddCardsToHand(poolCard, ref rightHand);
-            }
-        }
-    }
+    #endregion
+
 
     //Basýlý tutuðumda gelen veriyi yukarýda sürekli bir þekilde kontrol edicem bu sayede gelen veri hýzýna göre haraket etmicek delay koyabilicem
     public void SetSwipeDetectorMessage(EnumSwipeDirection _swipeDirection)
@@ -160,7 +167,6 @@ public class CardsController : MonoBehaviour
             case EnumSwipeDirection.None:
                 enumSwipeDirection = EnumSwipeDirection.None;
                 break;
-
         }
     }
 }
