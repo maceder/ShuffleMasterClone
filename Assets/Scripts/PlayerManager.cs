@@ -18,15 +18,15 @@ public class PlayerManager : MonoBehaviour
         switch (data.Direction)
         {
             case EnumSwipeDirection.Left:
-                cardsController.MoveCardToOtherHand(data.Direction);
+                cardsController.SetSwipeDetectorMessage(data.Direction);
                 playerAnimationController.LeftHandUp();
                 break;
             case EnumSwipeDirection.Right:
-                cardsController.MoveCardToOtherHand(data.Direction);
+                cardsController.SetSwipeDetectorMessage(data.Direction);
                 playerAnimationController.RightHandUp();
                 break;
             case EnumSwipeDirection.None:
-                cardsController.MoveCardToOtherHand(data.Direction);
+                cardsController.SetSwipeDetectorMessage(data.Direction);
                 playerAnimationController.SetPlayerInGameAnim();
                 break;
         }

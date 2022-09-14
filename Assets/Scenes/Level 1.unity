@@ -457,7 +457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pooledObjects: []
   objectToPool: {fileID: 5443398179896423004, guid: e54b571869310e14da07709106faa1f9, type: 3}
-  amountToPool: 25
+  amountToPool: 100
 --- !u!1 &573010841
 GameObject:
   m_ObjectHideFlags: 0
@@ -1282,14 +1282,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c0dd7baf05634d428705acf07016ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftHand:
-  - {fileID: 1729164569}
-  rightHand:
-  - {fileID: 1762176188}
+  leftHand: []
+  rightHand: []
   leftHandPosition: {fileID: 1729164570}
   rightHandPosition: {fileID: 1762176189}
-  enumSwipeDirection: 2
   cardMoveDelay: 0.1
+  startCardAmount: 25
 --- !u!1 &1244942363
 GameObject:
   m_ObjectHideFlags: 0
@@ -1384,7 +1382,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1251921401}
   - component: {fileID: 1251921403}
-  - component: {fileID: 1251921404}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -1420,18 +1417,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minDistanceForSwipe: 2
---- !u!114 &1251921404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1251921400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d343e8b82d928f43bf8820777ed631e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1382808902
 GameObject:
   m_ObjectHideFlags: 0

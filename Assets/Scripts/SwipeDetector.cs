@@ -20,23 +20,23 @@ public class SwipeDetector : MonoBehaviour
 
     private void LateUpdate()
     {
-            foreach (Touch touch in Input.touches)
+        foreach (Touch touch in Input.touches)
+        {
+            switch (touch.phase)
             {
-                switch (touch.phase)
-                {
-                    case TouchPhase.Began:
-                        fingerUpPosition = touch.position;
-                        fingerDownPosition = touch.position;
-                        break;
-                    case TouchPhase.Moved:
-                        fingerDownPosition = touch.position;
-                        DetectSwipe();
-                        break;
-                    case TouchPhase.Ended:
-                        SendSwipe(EnumSwipeDirection.None);
-                        break;
-                }
+                case TouchPhase.Began:
+                    fingerUpPosition = touch.position;
+                    fingerDownPosition = touch.position;
+                    break;
+                case TouchPhase.Moved:
+                    fingerDownPosition = touch.position;
+                    DetectSwipe();
+                    break;
+                case TouchPhase.Ended:
+                    SendSwipe(EnumSwipeDirection.None);
+                    break;
             }
+        }
     }
     private void DetectSwipe()
     {
