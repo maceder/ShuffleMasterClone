@@ -7,4 +7,4 @@
 > - Başlangıç kart sayısını.
 
 ### SwipeDetector ayarları
-> Swipe'ı algılaması için ekranda kaydırması gereken minimum uzunluk
+> - Swipe'ı algılaması için ekranda kaydırması gereken minimum uzunluk
