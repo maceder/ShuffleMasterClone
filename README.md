@@ -2,9 +2,9 @@
 ## Melihcan Topal - topal.melihcan99@gmail.com
 
 ### CardController ayarları
-> kartların artış azalış hızını.
-> shuffle hızını.
-> başlangıç kart sayısını.
+> - Kartların artış azalış hızını.
+> - Shuffle hızını.
+> - Başlangıç kart sayısını.
 
 ### SwipeDetector ayarları
 > Swipe'ı algılaması için ekranda kaydırması gereken minimum uzunluk
