@@ -23,6 +23,7 @@ public class CardsController : MonoBehaviour
 
     public float cardMoveDelay;
     public int startCardAmount;
+    public float cardTransactionDelay = 0.02f;
 
     private float currentCardDelay;
     private EnumSwipeDirection enumSwipeDirection;
@@ -206,7 +207,7 @@ public class CardsController : MonoBehaviour
                 else
                     AddCardsToHand(poolCard, ref rightHand);
             }
-            yield return new WaitForSeconds(0.07f);
+            yield return new WaitForSeconds(cardTransactionDelay);
         }
     }
     private IEnumerator RemoveCardFromHand(bool isleft, int removeCardAmount)
@@ -225,7 +226,7 @@ public class CardsController : MonoBehaviour
                 obj.SetActive(false);
                 _hand.Remove(obj);
             }
-            yield return new WaitForSeconds(0.07f);
+            yield return new WaitForSeconds(cardTransactionDelay);
         }
     }
 

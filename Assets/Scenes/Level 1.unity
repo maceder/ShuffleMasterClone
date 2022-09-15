@@ -2706,6 +2706,7 @@ MonoBehaviour:
   rightHandPosition: {fileID: 1762176189}
   cardMoveDelay: 0.02
   startCardAmount: 12
+  cardTransactionDelay: 0.02
 --- !u!1 &1244942363
 GameObject:
   m_ObjectHideFlags: 0
