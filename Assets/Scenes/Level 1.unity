@@ -344,7 +344,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fourTransactions: 0
-  gateAmount: 9
+  gateAmount: 4
   textMeshProUGUI: {fileID: 1348745996}
 --- !u!65 &70074725
 BoxCollider:
@@ -733,8 +733,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 248348874}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.3155015, y: -5.3354936, z: -0.2243333}
-  m_LocalScale: {x: 10, y: 1, z: 100}
+  m_LocalPosition: {x: 2.3155015, y: -5.3354936, z: 0}
+  m_LocalScale: {x: 10, y: 1, z: 200}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 271760070}
@@ -1030,7 +1030,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pooledObjects: []
   objectToPool: {fileID: 5443398179896423004, guid: e54b571869310e14da07709106faa1f9, type: 3}
-  amountToPool: 100
+  amountToPool: 300
 --- !u!1 &559253724
 GameObject:
   m_ObjectHideFlags: 0
@@ -1500,8 +1500,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c88688b72cc6e894787644122ebc8ebd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fourTransactions: 0
-  gateAmount: 7
+  fourTransactions: 2
+  gateAmount: 2
   textMeshProUGUI: {fileID: 1348221050}
 --- !u!65 &684587068
 BoxCollider:
@@ -2455,7 +2455,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1146323322}
   - component: {fileID: 1146323323}
-  - component: {fileID: 1146323325}
   - component: {fileID: 1146323324}
   - component: {fileID: 1146323326}
   m_Layer: 0
@@ -2515,20 +2514,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30c5e8e6ed662aa4bae6a5bae1cbeaad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1146323325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1146323321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: debfbc996b45a704b9ff82433d5730ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerAnimationController: {fileID: 1146323324}
-  cardsController: {fileID: 1146323326}
 --- !u!114 &1146323326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2688,6 +2673,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1251921401}
   - component: {fileID: 1251921403}
+  - component: {fileID: 1251921404}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -2723,6 +2709,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minDistanceForSwipe: 2
+--- !u!114 &1251921404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251921400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: debfbc996b45a704b9ff82433d5730ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerAnimationController: {fileID: 1146323324}
+  cardsController: {fileID: 1146323326}
 --- !u!1 &1288506629
 GameObject:
   m_ObjectHideFlags: 0
@@ -3058,7 +3058,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fourTransactions: 0
-  gateAmount: 9
+  gateAmount: 6
   textMeshProUGUI: {fileID: 1630287990}
 --- !u!65 &1328999404
 BoxCollider:
@@ -3552,7 +3552,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fourTransactions: 2
-  gateAmount: 4
+  gateAmount: 3
   textMeshProUGUI: {fileID: 1056650608}
 --- !u!65 &1353926021
 BoxCollider:

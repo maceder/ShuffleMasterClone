@@ -145,37 +145,44 @@ public class CardsController : MonoBehaviour
         switch (fourTransactions)
         {
             case FourTransactions.plus:
-                StartCoroutine(AddCardDelay(isleft, value));
+                if (isleft && leftHand.Count > 1)
+                    StartCoroutine(AddCardDelay(isleft, value));
+                else if (!isleft && rightHand.Count > 1)
+                    StartCoroutine(AddCardDelay(isleft, value));
                 break;
             case FourTransactions.minus:
-                StartCoroutine(RemoveCardFromHand(isleft, value));
+                if (isleft && leftHand.Count > 1)
+                    StartCoroutine(RemoveCardFromHand(isleft, value));
+                else if (!isleft && rightHand.Count > 1)
+                    StartCoroutine(RemoveCardFromHand(isleft, value));
                 break;
             case FourTransactions.multi:
                 var multiAmount = 0;
-                if (isleft)
+                if (isleft && leftHand.Count > 1)
                 {
                     multiAmount = leftHand.Count * value;
-                    multiAmount -= leftHand.Count;
+                    multiAmount -= leftHand.Count + 1;
                     StartCoroutine(AddCardDelay(isleft, multiAmount));
                 }
-                else
+                else if (!isleft && rightHand.Count > 1)
                 {
                     multiAmount = rightHand.Count * value;
+                    multiAmount -= rightHand.Count + 1;
                     StartCoroutine(AddCardDelay(isleft, multiAmount));
                 }
                 break;
             case FourTransactions.compartment:
                 var compartAmount = 0;
-                if (isleft)
+                if (isleft && leftHand.Count > 1)
                 {
                     compartAmount = leftHand.Count / value;
-                    compartAmount = leftHand.Count - compartAmount;
+                    compartAmount = leftHand.Count + 1 - compartAmount;
                     StartCoroutine(RemoveCardFromHand(isleft, compartAmount));
                 }
-                else
+                else if (!isleft && rightHand.Count > 1)
                 {
                     compartAmount = rightHand.Count / value;
-                    compartAmount = rightHand.Count - compartAmount;
+                    compartAmount = rightHand.Count + 1 - compartAmount;
                     StartCoroutine(RemoveCardFromHand(isleft, compartAmount));
                 }
                 break;
