@@ -6,6 +6,11 @@ using TMPro;
 using DG.Tweening;
 using System;
 
+
+/// <summary>
+/// Cardlarý kontroll ettiðim yer
+/// </summary>
+
 public class CardsController : MonoBehaviour
 {
     [SerializeField]
@@ -23,9 +28,13 @@ public class CardsController : MonoBehaviour
     private EnumSwipeDirection enumSwipeDirection;
 
 
+
+    //Listeyi boþaltma ve baþlangýçta oluþacak kartlar
+
     private void Start()
     {
         enumSwipeDirection = EnumSwipeDirection.None;
+
         leftHand = new List<GameObject>();
         rightHand = new List<GameObject>();
 
@@ -47,6 +56,11 @@ public class CardsController : MonoBehaviour
             }
         }
     }
+
+
+    /// <summary>
+    /// Kendim bir delay koyabilmek adýna Update kullanýyorum gelen veri hýzýna göre iþlem yapmýyorum
+    /// </summary>
 
     private void Update()
     {
@@ -77,6 +91,9 @@ public class CardsController : MonoBehaviour
         }
     }
 
+
+    //Kartýn saða sola gitmesini kontrol ediyorum
+
     private void ShuffleCardToHands(List<GameObject> _addListHand, List<GameObject> _removeListHand)
     {
         var rightCardObject = _addListHand.Last();
@@ -86,7 +103,9 @@ public class CardsController : MonoBehaviour
         _addListHand.Remove(rightCardObject);
     }
 
+    #region TransactionOnCards
 
+    //Kart eklediðim yer
 
     private void AddCardsToHand(GameObject obj, ref List<GameObject> handList)
     {
@@ -119,12 +138,55 @@ public class CardsController : MonoBehaviour
     }
 
 
+    //Gelen veriyi iþlemine göre iþlediðim yer
 
-
+    public void CalculateTransactionValue(bool isleft, int value, FourTransactions fourTransactions)
+    {
+        switch (fourTransactions)
+        {
+            case FourTransactions.plus:
+                StartCoroutine(AddCardDelay(isleft, value));
+                break;
+            case FourTransactions.minus:
+                StartCoroutine(RemoveCardFromHand(isleft, value));
+                break;
+            case FourTransactions.multi:
+                var multiAmount = 0;
+                if (isleft)
+                {
+                    multiAmount = leftHand.Count * value;
+                    multiAmount -= leftHand.Count;
+                    StartCoroutine(AddCardDelay(isleft, multiAmount));
+                }
+                else
+                {
+                    multiAmount = rightHand.Count * value;
+                    StartCoroutine(AddCardDelay(isleft, multiAmount));
+                }
+                break;
+            case FourTransactions.compartment:
+                var compartAmount = 0;
+                if (isleft)
+                {
+                    compartAmount = leftHand.Count / value;
+                    compartAmount = leftHand.Count - compartAmount;
+                    StartCoroutine(RemoveCardFromHand(isleft, compartAmount));
+                }
+                else
+                {
+                    compartAmount = rightHand.Count / value;
+                    compartAmount = rightHand.Count - compartAmount;
+                    StartCoroutine(RemoveCardFromHand(isleft, compartAmount));
+                }
+                break;
+        }
+    }
 
     #region IEnumerator
 
-    public IEnumerator AddCardDelay(bool isleft, int _value)
+
+    //Artýþ ve Azalýþta animasyon gibi gözüksün diye delay koyduðum yer
+    private IEnumerator AddCardDelay(bool isleft, int _value)
     {
         for (int i = 0; i < _value; i++)
         {
@@ -140,7 +202,7 @@ public class CardsController : MonoBehaviour
             yield return new WaitForSeconds(0.07f);
         }
     }
-    public IEnumerator RemoveCardFromHand(bool isleft, int removeCardAmount)
+    private IEnumerator RemoveCardFromHand(bool isleft, int removeCardAmount)
     {
         for (int i = 0; i < removeCardAmount; i++)
         {
@@ -162,6 +224,7 @@ public class CardsController : MonoBehaviour
 
     #endregion
 
+    #endregion
 
     //Basýlý tutuðumda gelen veriyi yukarýda sürekli bir þekilde kontrol edicem bu sayede gelen veri hýzýna göre haraket etmicek delay koyabilicem
     public void SetSwipeDetectorMessage(EnumSwipeDirection _swipeDirection)

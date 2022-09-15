@@ -79,7 +79,7 @@ public class Message {
         sendMessage (eventName, message);
     }
 
-    
+
     private static void sendMessage<T> (EventName eventName, T e)  {
         if (!handlers.ContainsKey (eventName)) return;
 

@@ -2,7 +2,6 @@
 
 public enum EventName
 {
-    GateAmount,
-    WhichHand,
     SwipeDirection,
+    GateAllStats,
 }

@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Ellerin Animasyonlarý
+/// </summary>
+
 public class PlayerAnimationController : MonoBehaviour
 {
     private Animator playerAnimator;

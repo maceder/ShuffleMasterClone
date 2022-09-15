@@ -6,6 +6,9 @@ using UnityEngine;
 /// <summary>
 /// Ekrandaki kaydýrma haraketinin yönünü belirliyor
 /// </summary>
+/// 
+
+
 public class SwipeDetector : MonoBehaviour
 {
     private Vector2 fingerDownPosition;

@@ -1,6 +1,6 @@
 
 /// <summary>
-/// Baþlangýçta Empty Exit olunca None Biterken 'de görünmez arrow Finish
+/// Ellerin durumlarý 
 /// </summary>
 
 public enum EnumSwipeDirection
