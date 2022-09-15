@@ -50,13 +50,14 @@ public class CardsController : MonoBehaviour
 
     private void Update()
     {
+
+        leftHandCardAmountText.text = (leftHand.Count - 1).ToString();
+        rightHandCardAmountText.text = (rightHand.Count - 1).ToString();
+
         currentCardDelay -= Time.deltaTime;
 
         if (currentCardDelay < 0)
         {
-            leftHandCardAmountText.text = (leftHand.Count - 1).ToString();
-            rightHandCardAmountText.text = (rightHand.Count - 1).ToString();
-
             currentCardDelay = cardMoveDelay;
 
             switch (enumSwipeDirection)
@@ -123,28 +124,37 @@ public class CardsController : MonoBehaviour
 
     #region IEnumerator
 
-    public IEnumerator AddCardDelay(List<GameObject> _handList, int _value)
+    public IEnumerator AddCardDelay(bool isleft, int _value)
     {
-        for (int i = 1; i < _value; i++)
+        for (int i = 0; i < _value; i++)
         {
             var poolCard = ObjectPool.SharedInstance.GetPooledObject();
             if (poolCard != null)
             {
                 poolCard.SetActive(true);
-                AddCardsToHand(poolCard, ref _handList);
+                if (isleft)
+                    AddCardsToHand(poolCard, ref leftHand);
+                else
+                    AddCardsToHand(poolCard, ref rightHand);
             }
             yield return new WaitForSeconds(0.07f);
         }
     }
-    public IEnumerator RemoveCardFromHand(List<GameObject> _handList, int removeCardAmount)
+    public IEnumerator RemoveCardFromHand(bool isleft, int removeCardAmount)
     {
         for (int i = 0; i < removeCardAmount; i++)
         {
-            if (_handList.Count > 1)
+            var _hand = new List<GameObject>();
+            if (isleft)
+                _hand = leftHand;
+            else
+                _hand = rightHand;
+
+            if (_hand.Count > 1)
             {
-                var obj = _handList.Last();
+                var obj = _hand.Last();
                 obj.SetActive(false);
-                _handList.Remove(obj);
+                _hand.Remove(obj);
             }
             yield return new WaitForSeconds(0.07f);
         }

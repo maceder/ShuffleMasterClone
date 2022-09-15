@@ -12,16 +12,19 @@ public class PlayerManager : MonoBehaviour
 
     private void OnEnable()
     {
-        //CollisionTrig
-        Message.AddListener<int>(EventName.WhichHand, CurrentSetCurrentAmount);
+        ////CollisionTrig
+        Message.AddListener<int>(EventName.GateAmount, CurrentSetCurrentAmount);
         Message.AddListener<EnumSwipeDirection>(EventName.WhichHand, WhichHandCollisionDetect);
+
+
         //Swipe
         Message.AddListener<EnumSwipeDirection>(EventName.SwipeDirection, SwipeDetector_OnSwipe);
     }
     private void OnDisable()
     {
-        Message.RemoveListener<int>(EventName.WhichHand, CurrentSetCurrentAmount);
-        Message.RemoveListener<EnumSwipeDirection>(EventName.WhichHand, SwipeDetector_OnSwipe);
+        Message.RemoveListener<int>(EventName.GateAmount, CurrentSetCurrentAmount);
+        Message.RemoveListener<EnumSwipeDirection>(EventName.WhichHand, WhichHandCollisionDetect);
+
         Message.RemoveListener<EnumSwipeDirection>(EventName.SwipeDirection, SwipeDetector_OnSwipe);
     }
 
@@ -34,10 +37,16 @@ public class PlayerManager : MonoBehaviour
         switch (enumSwipeDirection)
         {
             case EnumSwipeDirection.Left:
-                cardsController.AddCardDelay(cardsController.leftHand, currentAmount);
+                if (currentAmount > 0)
+                    cardsController.StartCoroutine(cardsController.AddCardDelay(true, currentAmount));
+                else
+                    cardsController.StartCoroutine(cardsController.RemoveCardFromHand(true, currentAmount *= -1));
                 break;
             case EnumSwipeDirection.Right:
-                cardsController.AddCardDelay(cardsController.rightHand, currentAmount);
+                if (currentAmount > 0)
+                    cardsController.StartCoroutine(cardsController.AddCardDelay(false, currentAmount));
+                else
+                    cardsController.StartCoroutine(cardsController.RemoveCardFromHand(false, currentAmount *= -1));
                 break;
         }
     }

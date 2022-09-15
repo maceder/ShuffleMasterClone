@@ -490,8 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c88688b72cc6e894787644122ebc8ebd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gateType: 1
-  gateAmount: 0
+  gateAmount: -5
   textMeshProUGUI: {fileID: 1830209444}
 --- !u!65 &559253726
 BoxCollider:
@@ -1689,7 +1688,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c88688b72cc6e894787644122ebc8ebd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gateType: 0
   gateAmount: 5
   textMeshProUGUI: {fileID: 1307953548}
 --- !u!1 &1307953546

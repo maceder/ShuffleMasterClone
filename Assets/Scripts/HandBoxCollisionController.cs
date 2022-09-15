@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class HandBoxCollisionController : MonoBehaviour
 {
-    [SerializeField]
-    private EnumSwipeDirection enumSwipeDirection;
+    public EnumSwipeDirection enumSwipeDirection;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Gate"))
         {
+            Message.Send<int>(EventName.GateAmount, other.GetComponent<GateStats>().gateAmount);
             Message.Send<EnumSwipeDirection>(EventName.WhichHand, enumSwipeDirection);
-            Message.Send<int>(EventName.GateCollision, other.GetComponent<GateStats>().gateAmount);
             other.GetComponent<BoxCollider>().enabled = false;
         }
     }
