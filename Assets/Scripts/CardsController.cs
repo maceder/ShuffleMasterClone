@@ -161,13 +161,13 @@ public class CardsController : MonoBehaviour
                 if (isleft && leftHand.Count > 1)
                 {
                     multiAmount = leftHand.Count * value;
-                    multiAmount -= leftHand.Count + 1;
+                    multiAmount = multiAmount - value - leftHand.Count + 1;
                     StartCoroutine(AddCardDelay(isleft, multiAmount));
                 }
                 else if (!isleft && rightHand.Count > 1)
                 {
                     multiAmount = rightHand.Count * value;
-                    multiAmount -= rightHand.Count + 1;
+                    multiAmount = multiAmount - value - rightHand.Count + 1;
                     StartCoroutine(AddCardDelay(isleft, multiAmount));
                 }
                 break;
@@ -176,14 +176,14 @@ public class CardsController : MonoBehaviour
                 if (isleft && leftHand.Count > 1)
                 {
                     compartAmount = leftHand.Count / value;
-                    compartAmount = leftHand.Count + 1 - compartAmount;
-                    StartCoroutine(RemoveCardFromHand(isleft, compartAmount));
+                    compartAmount = leftHand.Count - compartAmount;
+                    StartCoroutine(RemoveCardFromHand(isleft, compartAmount - 1));
                 }
                 else if (!isleft && rightHand.Count > 1)
                 {
                     compartAmount = rightHand.Count / value;
-                    compartAmount = rightHand.Count + 1 - compartAmount;
-                    StartCoroutine(RemoveCardFromHand(isleft, compartAmount));
+                    compartAmount = rightHand.Count - compartAmount;
+                    StartCoroutine(RemoveCardFromHand(isleft, compartAmount - 1));
                 }
                 break;
         }
